@@ -2,7 +2,7 @@
 <odoo>
     <menuitem 
         id="vue_owl_top_menu" 
-        sequence="1" 
+        sequence="900" 
         name="Vues OWL"
     />
 
