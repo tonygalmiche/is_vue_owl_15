@@ -7,15 +7,90 @@
         <div style="background-color:LightGreen">
             Le but est de créer une vue avec le maximum de fonctionnalités : <br />
             - Surchage des modules web.BasicController, web.KanbanRecord, web.AbstractRendererOwl et web.BasicModel <br />
-            - Boutons actions
-            - Fonctions RPC
-            - OnClick
+            - Boutons actions <br />
+            - Fonctions RPC <br />
+            - t-on-mouseenter,  t-on-mouseleave et t-on-click<br />
+            - useState <br />
+            - Ajout de données complémentaires à chaque recherche (additionalData) <br />
         </div>
 
         <div class="buttons">
             <button class="btn btn-primary" t-on-click="TestButtonClick">Test Button</button>
             <button class="btn btn-primary" t-on-click="ActivityClearClick">Clear activity_types</button>
         </div>
+
+        
+
+        <h2>additionalPartner</h2>
+        <table class="unselectable">
+            <thead>
+                <tr>
+                    <th></th><th>id</th><th>name</th>
+                    <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key">
+                        <th 
+                            style="width:15pt;text-align:center;font-size: 7pt;"
+                        >
+                            <t t-esc="jour.key"/>
+                        </th>
+                    </t>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="state.additionalPartner or []" t-as="partner" t-key="partner.id">
+                        <tr 
+                            t-on-mouseenter="TrMouseEnter" 
+                            t-on-mouseleave="TrMouseLeave" 
+                            t-on-click="TrClick" 
+                            t-att-click="-1" 
+                            t-att-style="partner.trstyle"
+                            t-att-memstyle="partner.trstyle"
+
+                            t-on-mousedown="TrMouseDown" 
+                            t-on-mousemove="TrMouseMove" 
+                            t-on-mouseup="TrMouseUp" 
+
+                        >
+                        <td style="width:70px;">
+                            <span 
+                                class="fa fa-trash link"
+                                alt="Supprimer"
+                                t-on-click="DeleteAdditionalPartnerClick" 
+                                t-att-id="partner.id"
+                                style="margin-left:0.5em;cursor: pointer;"
+                            />
+                            <span 
+                                class="fa fa-search-plus link"
+                                alt="Voir partner"
+                                t-on-click="VoirPartnerClick" 
+                                t-att-id="partner.id"
+                                style="margin-left:0.5em;cursor: pointer;"
+                            />
+                            <span 
+                                class="fa fa-edit link"
+                                alt="Modifier partner"
+                                t-on-click="ModifierPartnerClick" 
+                                t-att-id="partner.id"
+                                style="margin-left:0.5em;cursor: pointer;"
+                            />
+                        </td>
+                        <td style="width:50px;"><t t-esc="partner.id"/></td>
+                        <td style="width:200px;white-space: nowrap;"><t t-esc="partner.name"/></td>
+
+                        <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key">
+                            <td 
+                                style="width:10pt;text-align:center;font-size: 7pt;"
+                                t-att-style="jour.style"
+                            >
+                            </td>
+                        </t>
+
+
+
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
 
 
 
@@ -32,7 +107,6 @@
                             t-att-style="partner.trstyle"
                             t-att-memstyle="partner.trstyle"
                         >
-
                         <td>
                             <span 
                                 class="fa fa-trash link"
@@ -42,8 +116,6 @@
                                 style="margin-left:0.5em;cursor: pointer;"
                             />
                         </td>
-
-
                         <td><t t-esc="partner.id"/></td>
                         <td><t t-esc="partner.name"/></td>
                     </tr>

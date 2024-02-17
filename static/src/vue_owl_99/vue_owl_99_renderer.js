@@ -27,8 +27,64 @@ class VueOwl99Renderer extends AbstractRendererOwl {
     mounted() {
         console.log("VueOwl99Renderer : mounted",this);
         //Copies des données du model dans this.state pour être affichée dans la vue XML et modifiés directement
-        this.state.activity_types = this.props.activity_types
+        this.state.activity_types    = this.props.activity_types;
+        this.state.additionalPartner = this.props.partners;
+
+        var jours=[];
+        for (let i = 1; i <= 2*31; i++) {
+            var jour={};
+            jour={
+                "key": i,
+                "style": "cursor:default;background-color:white",
+            };
+            if (i>10 && i<20){
+                jour.style = "cursor:move;background-color:Chartreuse"
+            }
+            if (i==10 || i==20){
+                jour.style = "cursor:col-resize;background-color:Chartreuse"
+            }
+            jours.push(jour);
+        }
+        this.state.jours=jours;
     }
+
+
+    willStart() {
+        console.log("VueOwl99Renderer : willStart",this);
+    }
+    willRender() {
+        console.log("VueOwl99Renderer : willRender",this);
+    }
+    rendered() {
+        console.log("VueOwl99Renderer : rendered",this);
+    }
+     willUpdateProps() {
+        console.log("VueOwl99Renderer : willUpdateProps",this);
+    }
+    willPatch() {
+        console.log("VueOwl99Renderer : willPatch",this);
+    }
+    patched() {
+        this.state.additionalPartner = this.props.partners
+        console.log("VueOwl99Renderer : patched",this);
+    }
+    willUnmount() {
+        console.log("VueOwl99Renderer : willUnmount",this);
+    }
+    willDestroy() {
+        console.log("VueOwl99Renderer : willDestroy",this);
+    }
+    onError() {
+        console.log("VueOwl99Renderer : onError",this);
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -63,6 +119,23 @@ class VueOwl99Renderer extends AbstractRendererOwl {
         }
     }
 
+    TrMouseDown(ev) {
+        console.log('TrMouseDown',ev);
+    }
+    TrMouseMove(ev) {
+        console.log('TrMouseMove',ev);
+    }
+    TrMouseUp(ev) {
+        console.log('TrMouseUp',ev);
+    }
+
+    // t-on-mousedown="TrMouseDown" 
+    // t-on-mousemove="TrMouseMove" 
+    // t-on-mouseup="TrMouseUp" 
+
+
+
+
 
     DeleteClick(ev){
         var id=ev.target.attributes.id.value;
@@ -76,7 +149,58 @@ class VueOwl99Renderer extends AbstractRendererOwl {
             
         })
     }
+    
+    DeleteAdditionalPartnerClick(ev){
+        const id=ev.target.attributes.id.value;
+        var partners = this.state.additionalPartner;
+        partners.forEach((item, index) => {
+            console.log(index, item.id);
+            if (item.id==id){
+                this.state.additionalPartner.splice(index, 1);
+                return;
+            }
+            
+        })
+    }
+    
 
+    VoirPartnerClick(ev) {
+        const id=ev.target.attributes.id.value;
+        console.log('VoirPartnerClick',this);
+        this.env.bus.trigger('do-action', {
+            action: {
+                name:'Partner',
+                type: 'ir.actions.act_window',
+                //target: 'new',
+                res_id: parseInt(id),
+                res_model: 'res.partner',
+                views: [[false, 'form']],
+            },
+        });
+    }
+
+
+
+    ModifierPartnerClick(ev) {
+        const id=ev.target.attributes.id.value;
+        console.log('VoirPartnerClick',this);
+        this.env.bus.trigger('do-action', {
+            action: {
+                name:'Partner',
+                type: 'ir.actions.act_window',
+                target: 'new',
+                res_id: parseInt(id),
+                res_model: 'res.partner',
+                views: [[false, 'form']],
+            },
+        });
+    }
+
+
+
+
+
+    
 
     ActivityClearClick(ev){
         console.log("ActivityClearClick",this)

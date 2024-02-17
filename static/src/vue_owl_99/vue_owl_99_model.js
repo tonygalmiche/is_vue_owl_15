@@ -7,7 +7,7 @@ const VueOwl99Model = BasicModel.extend({
     __get: function () {
         var result = this._super.apply(this, arguments);
         if (result && result.model === this.modelName && result.type === 'list') {
-            _.extend(result, this.additionalData);
+            _.extend(result, this.additionalData, this.additionalPartner);
             //_.extend(result, this.additionalData, {getKanbanActivityData: this.getKanbanActivityData});
         }
 
@@ -68,7 +68,7 @@ const VueOwl99Model = BasicModel.extend({
         console.log("VueOwl99Model : _fetchData",this); 
 
         var self = this;
-        return this._rpc({
+        this._rpc({
             model: "mail.activity",
             method: 'get_activity_data',
             kwargs: {
@@ -77,12 +77,24 @@ const VueOwl99Model = BasicModel.extend({
                 context: session.user_context,
             }
         }).then(function (result) {
-
             console.log("VueOwl99Model : _fetchData : additionalData=",result); 
-
-
             self.additionalData = result;
         });
+
+        this._rpc({
+            model: 'res.partner',
+            method: 'get_vue_owl_99',
+            kwargs: {
+                domain: this.domain,
+            }
+        }).then(function (result) {
+            console.log("get_vue_owl_99 : result=",result);
+            self.additionalPartner = result;
+        });
+
+
+
+
     },
 
 

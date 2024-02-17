@@ -17,8 +17,21 @@
 }
 
 .vue_owl_15 th,.vue_owl_15 td {
-    border-top: 1px solid gray;
+    border: 1px solid gray;
+    // border-top: 1px solid gray;
+    // border-top: 1px solid gray;
+    // border-top: 1px solid gray;
 }
+
+
+.unselectable {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 
 
 h2{
