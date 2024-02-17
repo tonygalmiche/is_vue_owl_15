@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div t-name="is_vue_owl_15.VueOwl02Template" class="o_activity_view" owl="1">
+        <h1>Vue Owl 02</h1>
+        <div style="background-color:LightGreen">
+            Le but est de créer une vue en surchargeant les Modules : <br />
+            - web.BasicController <br />
+            - web.KanbanRecord <br />
+            - web.AbstractRendererOwl <br />
+            - web.BasicModel <br />
+            Cette surchage est utilsée uniquement pour afficher des logs dans la console JavaScript avec console.log
+        </div>
+        <t t-foreach="props.data" t-as="line" t-key="line.id">
+            <t t-esc="line.data.id"/> : <t t-esc="line.data.name"/> : <t t-esc="line.data.create_date"/><br />
+        </t>
+    </div>
+</templates>

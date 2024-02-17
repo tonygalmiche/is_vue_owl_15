@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem 
+        id="vue_owl_top_menu" 
+        sequence="1" 
+        name="Vues OWL"
+    />
+
+    <!-- Vue OWL 01 -->
+    <record id="vue_owl_01_view" model="ir.ui.view">
+        <field name="name">vue_owl_01_view</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <vue_owl_01>
+                <templates>
+                </templates>
+            </vue_owl_01>
+        </field>
+    </record>
+    <record  id="vue_owl_01_action" model="ir.actions.act_window">
+        <field name="name">Vue OWL 01</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">vue_owl_01,tree,form</field>
+    </record>
+    <menuitem
+        id="vue_owl_01_menu"
+        name="Vue OWL 01"
+        parent="vue_owl_top_menu"
+        sequence="10"
+        action="vue_owl_01_action"
+    />
+
+    <!-- Vue OWL 02 -->
+    <record id="vue_owl_02_view" model="ir.ui.view">
+        <field name="name">vue_owl_02_view</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <vue_owl_02>
+                <templates>
+                </templates>
+            </vue_owl_02>
+        </field>
+    </record>
+    <record  id="vue_owl_02_action" model="ir.actions.act_window">
+        <field name="name">Vue OWL 02</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">vue_owl_02,tree,form</field>
+    </record>
+    <menuitem
+        id="vue_owl_02_menu"
+        name="Vue OWL 02"
+        parent="vue_owl_top_menu"
+        sequence="20"
+        action="vue_owl_02_action"
+    />
+
+
+    <!-- Vue OWL 99 -->
+    <record id="vue_owl_99_view" model="ir.ui.view">
+        <field name="name">vue_owl_99_view</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <vue_owl_99>
+                <templates>
+                </templates>
+            </vue_owl_99>
+        </field>
+    </record>
+    <record  id="vue_owl_99_action" model="ir.actions.act_window">
+        <field name="name">Vue OWL 99</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">vue_owl_99,tree,form</field>
+    </record>
+    <menuitem
+        id="vue_owl_99_menu"
+        name="Vue OWL 99"
+        parent="vue_owl_top_menu"
+        sequence="30"
+        action="vue_owl_99_action"
+    />
+
+
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div t-name="is_vue_owl_15.VueOwl01Template" class="o_activity_view" owl="1">
+        <h1>Vue Owl 01</h1>
+        <div style="background-color:LightGreen">
+            Le but est de créer une vue en surchargeant le minimum de fonctions et en écrivant le minimum de code JavaScript.<br />
+            Cette vue affiche la liste des partners
+        </div>
+        <t t-foreach="props.data" t-as="line" t-key="line.id">
+            <t t-esc="line.data.id"/> : <t t-esc="line.data.name"/><br />
+        </t>
+    </div>
+</templates>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <div t-name="is_clair_sarl.ActivityRenderer" class="o_activity_view" owl="1">
+        <div class="d-flex flex-row">
+            <button class="btn" t-on-click="TestClick">Année</button>
+            <button class="btn" t-on-click="TestClick">Mois</button>
+            <button class="btn" t-on-click="TestClick">Semaine</button>
+        </div>
+
+
+        <h1>state.chantiers</h1>
+        <t t-foreach="state.chantiers" t-as="chantier" t-key="chantier.id">
+            <t t-esc="chantier.id"/> : <t t-esc="chantier.name"/><br />
+        </t>
+
+
+
+        <h1>data</h1>
+        <t t-foreach="props.data" t-as="chantier" t-key="chantier.id">
+            <t t-esc="chantier.data.id"/> : <t t-esc="chantier.data.name"/> : <t t-esc="chantier.data.commentaire"/><br />
+        </t>
+    </div>
+
+</templates>
