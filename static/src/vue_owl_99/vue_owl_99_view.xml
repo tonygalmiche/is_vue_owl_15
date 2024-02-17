@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <div t-name="is_vue_owl_15.VueOwl99Template" class="o_activity_view" owl="1">
+    <div t-name="is_vue_owl_15.VueOwl99Template" class="vue_owl_15" owl="1">
+
+
         <h1>Vue Owl 99</h1>
         <div style="background-color:LightGreen">
             Le but est de créer une vue avec le maximum de fonctionnalités : <br />
@@ -10,18 +12,90 @@
             - OnClick
         </div>
 
-        <div class="d-flex flex-row">
-            <button class="btn" t-on-click="TestButtonClick">Test Button</button>
+        <div class="buttons">
+            <button class="btn btn-primary" t-on-click="TestButtonClick">Test Button</button>
+            <button class="btn btn-primary" t-on-click="ActivityClearClick">Clear activity_types</button>
         </div>
 
+
+
         <h2>Résultat 'Test Button' </h2>
-        <t t-foreach="state.partners" t-as="partner" t-key="partner.id">
-            <t t-esc="partner.id"/> : <t t-esc="partner.name"/><br />
-        </t>
+        <table style="width:30%">
+            <thead><tr><th></th><th>id</th><th>name</th></tr></thead>
+            <tbody>
+                <t t-foreach="state.partners" t-as="partner" t-key="partner.id">
+                        <tr 
+                            t-on-mouseenter="TrMouseEnter" 
+                            t-on-mouseleave="TrMouseLeave" 
+                            t-on-click="TrClick" 
+                            t-att-click="-1" 
+                            t-att-style="partner.trstyle"
+                            t-att-memstyle="partner.trstyle"
+                        >
+
+                        <td>
+                            <span 
+                                class="fa fa-trash link"
+                                alt="Supprimer"
+                                t-on-click="DeleteClick" 
+                                t-att-id="partner.id"
+                                style="margin-left:0.5em;cursor: pointer;"
+                            />
+                        </td>
+
+
+                        <td><t t-esc="partner.id"/></td>
+                        <td><t t-esc="partner.name"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
+
+        <h2>Résultat VueOwl99Model - state.activity_types </h2>
+        <table style="width:30%">
+            <thead><tr><th>Code</th><th>Activité</th></tr></thead>
+            <tbody>
+                <t t-foreach="state.activity_types" t-as="line" t-key="line[0]">
+                    <tr>
+                        <td><t t-esc="line[0]"/></td>
+                        <td><t t-esc="line[1]"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
+
+
 
         <h2>Résultat VueOwl99Model - _fetchData </h2>
-        <t t-foreach="props.data" t-as="line" t-key="line.id">
-            <t t-esc="line.data.id"/> : <t t-esc="line.data.name"/> : <t t-esc="line.data.create_date"/><br />
-        </t>
+        <table style="width:30%">
+            <thead><tr><th>id</th><th>name</th><th>create_date</th></tr></thead>
+            <tbody>
+                <t t-foreach="props.data" t-as="line" t-key="line.id">
+                    <tr>
+                        <td><t t-esc="line.data.id"/></td>
+                        <td><t t-esc="line.data.name"/></td>
+                        <td><t t-esc="line.data.create_date"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
+        <h2>Résultat VueOwl99Model - additionalData.activity_types </h2>
+        <table style="width:30%">
+            <thead><tr><th>Code</th><th>Activité</th></tr></thead>
+            <tbody>
+                <t t-foreach="props.activity_types" t-as="line" t-key="line[0]">
+                    <tr>
+                        <td><t t-esc="line[0]"/></td>
+                        <td><t t-esc="line[1]"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
+
+
     </div>
 </templates>

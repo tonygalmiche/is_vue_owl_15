@@ -1,11 +1,24 @@
 /** @odoo-module **/
 import BasicModel from 'web.BasicModel';
+import session from 'web.session';
+
 
 const VueOwl99Model = BasicModel.extend({
     __get: function () {
         var result = this._super.apply(this, arguments);
+        if (result && result.model === this.modelName && result.type === 'list') {
+            _.extend(result, this.additionalData);
+            //_.extend(result, this.additionalData, {getKanbanActivityData: this.getKanbanActivityData});
+        }
+
+        console.log(result);
+
+
         return result;
     },
+
+
+
 
     /**
      * @override
@@ -44,17 +57,71 @@ const VueOwl99Model = BasicModel.extend({
     },
 
 
+
     /**
-     * Fetch data
+     * Fetch activity data.
      *
      * @private
      * @returns {Promise}
      */
-
     _fetchData: function () {
-        var self = this;
         console.log("VueOwl99Model : _fetchData",this); 
+
+        var self = this;
+        return this._rpc({
+            model: "mail.activity",
+            method: 'get_activity_data',
+            kwargs: {
+                res_model: this.modelName,
+                domain: this.domain,
+                context: session.user_context,
+            }
+        }).then(function (result) {
+
+            console.log("VueOwl99Model : _fetchData : additionalData=",result); 
+
+
+            self.additionalData = result;
+        });
     },
+
+
+    // /**
+    //  * Fetch data
+    //  *
+    //  * @private
+    //  * @returns {Promise}
+    //  */
+
+    // _fetchData: function () {
+    //     var self = this;
+    //     console.log("VueOwl99Model : _fetchData",this); 
+    // },
+
+
+    // _fetchData: function () {
+    //     var self = this;
+    //     return this._rpc({
+    //         model: "mail.activity",
+    //         method: 'get_activity_data',
+    //         kwargs: {
+    //             res_model: this.modelName,
+    //             domain: this.domain,
+    //             context: session.user_context,
+    //         }
+    //     }).then(function (result) {
+    //         self.additionalData = result;
+    //     });
+    // },
+
+
+
+
+
+
+
+
+
 });
 
 export default VueOwl99Model;

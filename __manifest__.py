@@ -20,6 +20,8 @@
     ],
     'assets': {
         'web.assets_backend': [
+            'is_vue_owl_15/static/src/scss/vue_owl.scss',
+
             'is_vue_owl_15/static/src/vue_owl_01/vue_owl_01_view.js',
 
             'is_vue_owl_15/static/src/vue_owl_02/vue_owl_02_controller.js',

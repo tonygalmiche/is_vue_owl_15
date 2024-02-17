@@ -8,13 +8,21 @@ class ResPartner(models.Model):
 
         print('get_vue_owl_99 : domain=',domain)
 
-
         res=[]
         partners=self.env['res.partner'].search(domain, order="name", limit=10)
+        trcolor=""
         for partner in partners:
+
+            if trcolor=="#ffffff":
+                trcolor="#f2f3f4"
+            else:
+                trcolor="#ffffff"
+            trstyle="background-color:%s"%(trcolor)
+
             vals={
                 "id"      : partner.id,
                 "name"    : partner.name,
+                "trstyle" : trstyle,
             }
             res.append(vals)
         print('get_vue_owl_99 : res=',res)
