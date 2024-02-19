@@ -9,7 +9,7 @@ class ResPartner(models.Model):
         print('get_vue_owl_99 : domain=',domain)
 
         res=[]
-        partners=self.env['res.partner'].search(domain, order="name", limit=10)
+        partners=self.env['res.partner'].search(domain, order="name", limit=100)
         trcolor=""
         for partner in partners:
 

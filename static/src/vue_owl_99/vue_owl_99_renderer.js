@@ -103,7 +103,7 @@ class VueOwl99Renderer extends AbstractRendererOwl {
     TrMouseEnter(ev) {
         const click=ev.target.attributes.click.value;
         if (click!="1"){
-            ev.target.style="background-color:#FFFF00";
+            ev.target.style="background-color:#FFFF00;opacity: 0.5;";
         }
     }
 
@@ -113,7 +113,7 @@ class VueOwl99Renderer extends AbstractRendererOwl {
         if (click!==undefined){
             click.value=-click.value
             if (click.value==1){
-                ev.target.parentElement.style="background-color:rgb(204, 255, 204)";
+                ev.target.parentElement.style="background-color:rgb(204, 255, 204);opacity: 0.5;";
             } else {
                 const memstyle = ev.target.parentElement.attributes.memstyle.value;
                 ev.target.parentElement.style=memstyle;

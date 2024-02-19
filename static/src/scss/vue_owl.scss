@@ -1,6 +1,5 @@
 
 
-
 .vue_owl_15{
     // color:red;
     margin:5pt;
@@ -37,3 +36,107 @@
 h2{
     margin-top:10pt;
 }
+
+
+
+
+// .vue_owl_15 {
+//     width:100%;
+//     height:85vh;
+//     background-color:gray;
+// }
+
+.vue_owl_15 table {
+    height: 85vh;
+    border-collapse: collapse;
+    width: 98%;
+    display: block;
+    overflow-y: scroll;
+}
+
+// .vue_owl_15 tbody {
+//     overflow-y: scroll;
+// }
+  
+.vue_owl_15 thead {
+    position: sticky;
+    top: 0;
+    background: #eee;
+}
+
+.vue_owl_15 td {
+    border: 1px solid gray;
+    padding-left:5pt;
+    padding-right:2pt;
+}
+.vue_owl_15 th {
+    border: 1px solid gray;
+    padding-left:5pt;
+    padding-right:2pt;
+}
+
+
+// .vue_owl_15 .headcol {
+//     position: absolute;
+//     width: 5em;
+//     left: 0;
+//     z-index:900;
+
+//     // top: auto;
+//     border-top-width: 1px;
+//     /*only relevant for first row*/
+//     margin-top: -1px;
+//     /*compensate for top border*/
+//   }
+  
+
+
+
+
+
+
+
+
+// .vue_owl_15 th {
+//     position: -webkit-sticky;
+//     position: sticky;
+//     top: 0;
+//     z-index: 2;
+// }
+
+// .vue_owl_15 th[scope=row] {
+//     position: -webkit-sticky;
+//     position: sticky;
+//     left: 0;
+//     z-index: 1;
+// }
+
+  
+// .vue_owl_15  table {
+//     text-align: left;
+//     position: relative;
+//     border-collapse: collapse; 
+// }
+// .vue_owl_15  th, .vue_owl_15 td {
+//     padding: 0.25rem;
+// }
+// .vue_owl_15 tr.red th {
+//     background: red;
+//     color: white;
+// }
+// .vue_owl_15 tr.green th {
+//     background: green;
+//     color: white;
+//   }
+// .vue_owl_15 tr.purple th {
+//     background: purple;
+//     color: white;
+//   }
+//   th {
+//     background: white;
+//     position: sticky;
+//     top: 0; /* Don't forget this, required for the stickiness */
+//     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+//   }
+  
+  

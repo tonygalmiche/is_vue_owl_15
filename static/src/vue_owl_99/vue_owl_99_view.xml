@@ -27,16 +27,22 @@
         jour = <t t-esc="state.jour"/>
 
 
-        <table class="unselectable">
+        <table class="unselectable" style="height:250px;width:1570px">
             <thead>
+                <tr><th colspan="100">Mettre ici une autre ligne en enetête fixée</th></tr>
                 <tr>
-                    <th></th><th>id</th><th>name</th>
-                    <!-- <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key">
+                    <th>Action</th><th>id</th><th>name</th>
+
+                    <t t-foreach="Object.values(state.jours or {})" t-as="jour" t-key="jour.key">
                         <th 
                             style="width:15pt;text-align:center;font-size: 7pt;"
                         >
-                            <t t-esc="jour.key"/>
+                            <!-- <t t-esc="jour.key"/> -->
                         </th>
+                    </t>
+
+
+                    <!-- <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key">
                     </t> -->
                 </tr>
             </thead>
@@ -49,11 +55,9 @@
                             t-att-click="-1" 
                             t-att-style="partner.trstyle"
                             t-att-memstyle="partner.trstyle"
-
                             t-att-partnerid="partner.id"
-
                         >
-                        <td style="width:70px;">
+                        <th style="width:80px;">
                             <span 
                                 class="fa fa-trash link"
                                 alt="Supprimer"
@@ -75,14 +79,14 @@
                                 t-att-id="partner.id"
                                 style="margin-left:0.5em;cursor: pointer;"
                             />
-                        </td>
-                        <td style="width:50px;"><t t-esc="partner.id"/></td>
-                        <td style="width:200px;white-space: nowrap;"><t t-esc="partner.name"/></td>
+                        </th>
+                        <th style="width:50px;"><t t-esc="partner.id"/></th>
+                        <th style="width:200px;white-space: nowrap;"><t t-esc="partner.name"/></th>
 
                         <!-- <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key"> -->
                         <t t-foreach="Object.values(state.jours or {})" t-as="jour" t-key="jour.key">
                             <td 
-                                style="width:10pt;text-align:center;font-size: 7pt;"
+                                style="width:20px;text-align:center;font-size: 7pt;"
 
                                 t-on-mousedown="tdMouseDown" 
                                 t-on-mousemove="tdMouseMove" 
