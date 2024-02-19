@@ -22,20 +22,25 @@
         
 
         <h2>additionalPartner</h2>
+
+        partnerid = <t t-esc="state.partnerid"/><br />
+        jour = <t t-esc="state.jour"/>
+
+
         <table class="unselectable">
             <thead>
                 <tr>
                     <th></th><th>id</th><th>name</th>
-                    <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key">
+                    <!-- <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key">
                         <th 
                             style="width:15pt;text-align:center;font-size: 7pt;"
                         >
                             <t t-esc="jour.key"/>
                         </th>
-                    </t>
+                    </t> -->
                 </tr>
             </thead>
-            <tbody>
+            <tbody  t-on-mouseleave="tbodyMouseLeave">
                 <t t-foreach="state.additionalPartner or []" t-as="partner" t-key="partner.id">
                         <tr 
                             t-on-mouseenter="TrMouseEnter" 
@@ -45,9 +50,7 @@
                             t-att-style="partner.trstyle"
                             t-att-memstyle="partner.trstyle"
 
-                            t-on-mousedown="TrMouseDown" 
-                            t-on-mousemove="TrMouseMove" 
-                            t-on-mouseup="TrMouseUp" 
+                            t-att-partnerid="partner.id"
 
                         >
                         <td style="width:70px;">
@@ -76,11 +79,25 @@
                         <td style="width:50px;"><t t-esc="partner.id"/></td>
                         <td style="width:200px;white-space: nowrap;"><t t-esc="partner.name"/></td>
 
-                        <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key">
+                        <!-- <t t-foreach="state.jours or []" t-as="jour" t-key="jour.key"> -->
+                        <t t-foreach="Object.values(state.jours or {})" t-as="jour" t-key="jour.key">
                             <td 
                                 style="width:10pt;text-align:center;font-size: 7pt;"
-                                t-att-style="jour.style"
+
+                                t-on-mousedown="tdMouseDown" 
+                                t-on-mousemove="tdMouseMove" 
+                                t-on-mouseup="tdMouseUp" 
+    
+                                t-att-style="state.styles[partner.id][jour.key].style"
+
+
+
+                                t-att-jour="jour.key"
                             >
+
+                            <!-- t-att-style="jour.style" -->
+
+
                             </td>
                         </t>
 

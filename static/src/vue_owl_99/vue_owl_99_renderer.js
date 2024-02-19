@@ -30,22 +30,35 @@ class VueOwl99Renderer extends AbstractRendererOwl {
         this.state.activity_types    = this.props.activity_types;
         this.state.additionalPartner = this.props.partners;
 
-        var jours=[];
-        for (let i = 1; i <= 2*31; i++) {
-            var jour={};
-            jour={
-                "key": i,
-                "style": "cursor:default;background-color:white",
-            };
-            if (i>10 && i<20){
-                jour.style = "cursor:move;background-color:Chartreuse"
+        //var partners = this.state.partners;
+
+
+        var jours={};
+        var styles={};
+        this.props.partners.forEach((partner, index) => {
+            styles[partner.id]={}
+            for (let i = 1; i <= 2*31; i++) {
+                var jour={};
+                jour={
+                    "key": i,
+                    "style": "cursor:default;background-color:white",
+                };
+                if (i>10 && i<20){
+                    jour.style = "cursor:move;background-color:Chartreuse"
+                }
+                if (i==10 || i==20){
+                    jour.style = "cursor:col-resize;background-color:Chartreuse"
+                }
+                jours[i]=jour;
+
+                styles[partner.id][i] = jour;
             }
-            if (i==10 || i==20){
-                jour.style = "cursor:col-resize;background-color:Chartreuse"
-            }
-            jours.push(jour);
-        }
+                    
+        });
+        console.log("styles=",styles);
+        this.state.styles=styles;
         this.state.jours=jours;
+        this.state.mousedown=0
     }
 
 
@@ -79,16 +92,6 @@ class VueOwl99Renderer extends AbstractRendererOwl {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     TrMouseLeave(ev) {
         const click=ev.target.attributes.click.value;
         if (click!="1"){
@@ -119,21 +122,47 @@ class VueOwl99Renderer extends AbstractRendererOwl {
         }
     }
 
-    TrMouseDown(ev) {
-        console.log('TrMouseDown',ev);
+
+
+
+    tdMouseDown(ev) {
+        var partnerid=ev.target.parentElement.attributes.partnerid;
+        if (partnerid!==undefined){
+            this.state.partnerid=partnerid.value;
+        }
+        var jour=ev.target.attributes.jour;
+        if (jour!==undefined){
+            this.state.jour=jour.value;
+        }
+        console.log('TrMouseDown : parentElement=',ev.target.parentElement);
     }
-    TrMouseMove(ev) {
-        console.log('TrMouseMove',ev);
+    tdMouseMove(ev) {
+        if (this.state.partnerid>0){
+            const jour=ev.target.attributes.jour;
+            if (jour!==undefined){
+
+                if(jour.value>this.state.jour){
+                    for (let i = this.state.jour; i <= jour.value; i++) {
+                        const style="background-color:red";
+                        this.state.styles[this.state.partnerid][i].style=style;
+                        this.state.jour=jour.value;
+                    }
+        
+                }
+
+            }
+        }
     }
-    TrMouseUp(ev) {
+    tdMouseUp(ev) {
         console.log('TrMouseUp',ev);
+        this.state.partnerid=0;
+        this.state.jour=0;
     }
 
-    // t-on-mousedown="TrMouseDown" 
-    // t-on-mousemove="TrMouseMove" 
-    // t-on-mouseup="TrMouseUp" 
-
-
+    tbodyMouseLeave(ev) {
+        this.state.partnerid=0;
+        this.state.jour=0;
+    }
 
 
 
